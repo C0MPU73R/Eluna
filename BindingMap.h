@@ -1,8 +1,8 @@
 /*
-* Copyright (C) 2010 - 2016 Eluna Lua Engine <http://emudevs.com/>
-* This program is free software licensed under GPL version 3
-* Please see the included DOCS/LICENSE.md for more information
-*/
+ * Copyright (C) 2010 - 2022 Eluna Lua Engine <https://elunaluaengine.github.io/>
+ * This program is free software licensed under GPL version 3
+ * Please see the included DOCS/LICENSE.md for more information
+ */
 
 #ifndef _BINDING_MAP_H
 #define _BINDING_MAP_H
