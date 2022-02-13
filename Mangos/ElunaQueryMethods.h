@@ -7,12 +7,6 @@
 #ifndef QUERYMETHODS_H
 #define QUERYMETHODS_H
 
-#if defined TRINITY || defined AZEROTHCORE
-#define RESULT  (*result)
-#else
-#define RESULT  result
-#endif
-
 /***
  * The result of a database query.
  *
@@ -25,7 +19,7 @@ namespace LuaQuery
     static void CheckFields(lua_State* L, ElunaQuery* result)
     {
         uint32 field = Eluna::CHECKVAL<uint32>(L, 2);
-        uint32 count = RESULT->GetFieldCount();
+        uint32 count = result->GetFieldCount();
         if (field >= count)
         {
             char arr[256];
@@ -45,11 +39,7 @@ namespace LuaQuery
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
 
-#if defined TRINITY || AZEROTHCORE
-        Eluna::Push(L, RESULT->Fetch()[col].IsNull());
-#else
-        Eluna::Push(L, RESULT->Fetch()[col].IsNULL());
-#endif
+        Eluna::Push(L, result->Fetch()[col].IsNULL());
         return 1;
     }
 
@@ -60,7 +50,7 @@ namespace LuaQuery
      */
     int GetColumnCount(lua_State* L, ElunaQuery* result)
     {
-        Eluna::Push(L, RESULT->GetFieldCount());
+        Eluna::Push(L, result->GetFieldCount());
         return 1;
     }
 
@@ -71,10 +61,10 @@ namespace LuaQuery
      */
     int GetRowCount(lua_State* L, ElunaQuery* result)
     {
-        if (RESULT->GetRowCount() > (uint32)-1)
+        if (result->GetRowCount() > (uint32)-1)
             Eluna::Push(L, (uint32)-1);
         else
-            Eluna::Push(L, (uint32)(RESULT->GetRowCount()));
+            Eluna::Push(L, (uint32)(result->GetRowCount()));
         return 1;
     }
 
@@ -88,7 +78,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetBool());
+        Eluna::Push(L, result->Fetch()[col].GetBool());
         return 1;
     }
 
@@ -102,7 +92,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetUInt8());
+        Eluna::Push(L, result->Fetch()[col].GetUInt8());
         return 1;
     }
 
@@ -116,7 +106,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetUInt16());
+        Eluna::Push(L, result->Fetch()[col].GetUInt16());
         return 1;
     }
 
@@ -130,7 +120,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetUInt32());
+        Eluna::Push(L, result->Fetch()[col].GetUInt32());
         return 1;
     }
 
@@ -144,7 +134,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetUInt64());
+        Eluna::Push(L, result->Fetch()[col].GetUInt64());
         return 1;
     }
 
@@ -158,7 +148,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetInt8());
+        Eluna::Push(L, result->Fetch()[col].GetInt8());
         return 1;
     }
 
@@ -172,7 +162,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetInt16());
+        Eluna::Push(L, result->Fetch()[col].GetInt16());
         return 1;
     }
 
@@ -186,7 +176,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetInt32());
+        Eluna::Push(L, result->Fetch()[col].GetInt32());
         return 1;
     }
 
@@ -200,7 +190,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetInt64());
+        Eluna::Push(L, result->Fetch()[col].GetInt64());
         return 1;
     }
 
@@ -214,7 +204,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetFloat());
+        Eluna::Push(L, result->Fetch()[col].GetFloat());
         return 1;
     }
 
@@ -228,7 +218,7 @@ namespace LuaQuery
     {
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
-        Eluna::Push(L, RESULT->Fetch()[col].GetDouble());
+        Eluna::Push(L, result->Fetch()[col].GetDouble());
         return 1;
     }
 
@@ -243,11 +233,7 @@ namespace LuaQuery
         uint32 col = Eluna::CHECKVAL<uint32>(L, 2);
         CheckFields(L, result);
 
-#ifndef TRINITY
-        Eluna::Push(L, RESULT->Fetch()[col].GetString());
-#else
-        Eluna::Push(L, RESULT->Fetch()[col].GetCString());
-#endif
+        Eluna::Push(L, result->Fetch()[col].GetString());
         return 1;
     }
 
@@ -262,7 +248,7 @@ namespace LuaQuery
      */
     int NextRow(lua_State* L, ElunaQuery* result)
     {
-        Eluna::Push(L, RESULT->NextRow());
+        Eluna::Push(L, result->NextRow());
         return 1;
     }
 
@@ -285,57 +271,16 @@ namespace LuaQuery
      */
     int GetRow(lua_State* L, ElunaQuery* result)
     {
-        uint32 col = RESULT->GetFieldCount();
-        Field* row = RESULT->Fetch();
+        uint32 col = result->GetFieldCount();
+        Field* row = result->Fetch();
 
         lua_createtable(L, 0, col);
         int tbl = lua_gettop(L);
 
-#if !defined TRINITY && !AZEROTHCORE
-        const QueryFieldNames& names = RESULT->GetFieldNames();
-#endif
+        const QueryFieldNames& names = result->GetFieldNames();
 
         for (uint32 i = 0; i < col; ++i)
         {
-#if defined TRINITY || AZEROTHCORE
-            Eluna::Push(L, RESULT->GetFieldName(i));
-
-            const char* str = row[i].GetCString();
-            if (row[i].IsNull() || !str)
-                Eluna::Push(L);
-            else
-            {
-                // MYSQL_TYPE_LONGLONG Interpreted as string for lua
-                switch (row[i].GetType())
-                {
-#if defined TRINITY || AZEROTHCORE
-                    case DatabaseFieldTypes::Int8:
-                    case DatabaseFieldTypes::Int16:
-                    case DatabaseFieldTypes::Int32:
-                    case DatabaseFieldTypes::Int64:
-                    case DatabaseFieldTypes::Float:
-                    case DatabaseFieldTypes::Double:
-#else
-                    case MYSQL_TYPE_TINY:
-                    case MYSQL_TYPE_YEAR:
-                    case MYSQL_TYPE_SHORT:
-                    case MYSQL_TYPE_INT24:
-                    case MYSQL_TYPE_LONG:
-                    case MYSQL_TYPE_LONGLONG:
-                    case MYSQL_TYPE_BIT:
-                    case MYSQL_TYPE_FLOAT:
-                    case MYSQL_TYPE_DOUBLE:
-                    case MYSQL_TYPE_DECIMAL:
-                    case MYSQL_TYPE_NEWDECIMAL:
-#endif
-                        Eluna::Push(L, strtod(str, NULL));
-                        break;
-                    default:
-                        Eluna::Push(L, str);
-                        break;
-        }
-    }
-#else
             Eluna::Push(L, names[i]);
 
             const char* str = row[i].GetString();
@@ -359,7 +304,6 @@ namespace LuaQuery
                         break;
                 }
             }
-#endif
 
             lua_rawset(L, tbl);
         }
