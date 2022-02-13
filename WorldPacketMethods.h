@@ -309,6 +309,42 @@ namespace LuaPacket
         (*packet) << _val;
         return 0;
     }
+
+    ElunaRegister<WorldPacket> PacketMethodsOverride[] =
+    {
+        // Getters
+        { "GetOpcode", &LuaPacket::GetOpcode },
+        { "GetSize", &LuaPacket::GetSize },
+
+        // Setters
+        { "SetOpcode", &LuaPacket::SetOpcode },
+
+        // Readers
+        { "ReadByte", &LuaPacket::ReadByte },
+        { "ReadUByte", &LuaPacket::ReadUByte },
+        { "ReadShort", &LuaPacket::ReadShort },
+        { "ReadUShort", &LuaPacket::ReadUShort },
+        { "ReadLong", &LuaPacket::ReadLong },
+        { "ReadULong", &LuaPacket::ReadULong },
+        { "ReadGUID", &LuaPacket::ReadGUID },
+        { "ReadString", &LuaPacket::ReadString },
+        { "ReadFloat", &LuaPacket::ReadFloat },
+        { "ReadDouble", &LuaPacket::ReadDouble },
+
+        // Writers
+        { "WriteByte", &LuaPacket::WriteByte },
+        { "WriteUByte", &LuaPacket::WriteUByte },
+        { "WriteShort", &LuaPacket::WriteShort },
+        { "WriteUShort", &LuaPacket::WriteUShort },
+        { "WriteLong", &LuaPacket::WriteLong },
+        { "WriteULong", &LuaPacket::WriteULong },
+        { "WriteGUID", &LuaPacket::WriteGUID },
+        { "WriteString", &LuaPacket::WriteString },
+        { "WriteFloat", &LuaPacket::WriteFloat },
+        { "WriteDouble", &LuaPacket::WriteDouble },
+
+        { NULL, NULL }
+    };
 };
 
 #endif

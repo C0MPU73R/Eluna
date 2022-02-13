@@ -1237,5 +1237,65 @@ namespace LuaWorldObject
             obj->PlayDistanceSound(soundId);
         return 0;
     }
+
+    ElunaRegister<WorldObject> WorldObjectMethodsOverride[] =
+    {
+        // Getters
+        { "GetName", &LuaWorldObject::GetName },
+        { "GetMap", &LuaWorldObject::GetMap },
+    #if (!defined(TBC) && !defined(CLASSIC))
+        { "GetPhaseMask", &LuaWorldObject::GetPhaseMask },
+        { "SetPhaseMask", &LuaWorldObject::SetPhaseMask },
+    #endif
+        { "GetInstanceId", &LuaWorldObject::GetInstanceId },
+        { "GetAreaId", &LuaWorldObject::GetAreaId },
+        { "GetZoneId", &LuaWorldObject::GetZoneId },
+        { "GetMapId", &LuaWorldObject::GetMapId },
+        { "GetX", &LuaWorldObject::GetX },
+        { "GetY", &LuaWorldObject::GetY },
+        { "GetZ", &LuaWorldObject::GetZ },
+        { "GetO", &LuaWorldObject::GetO },
+        { "GetLocation", &LuaWorldObject::GetLocation },
+        { "GetPlayersInRange", &LuaWorldObject::GetPlayersInRange },
+        { "GetCreaturesInRange", &LuaWorldObject::GetCreaturesInRange },
+        { "GetGameObjectsInRange", &LuaWorldObject::GetGameObjectsInRange },
+        { "GetNearestPlayer", &LuaWorldObject::GetNearestPlayer },
+        { "GetNearestGameObject", &LuaWorldObject::GetNearestGameObject },
+        { "GetNearestCreature", &LuaWorldObject::GetNearestCreature },
+        { "GetNearObject", &LuaWorldObject::GetNearObject },
+        { "GetNearObjects", &LuaWorldObject::GetNearObjects },
+        { "GetDistance", &LuaWorldObject::GetDistance },
+        { "GetExactDistance", &LuaWorldObject::GetExactDistance },
+        { "GetDistance2d", &LuaWorldObject::GetDistance2d },
+        { "GetExactDistance2d", &LuaWorldObject::GetExactDistance2d },
+        { "GetRelativePoint", &LuaWorldObject::GetRelativePoint },
+        { "GetAngle", &LuaWorldObject::GetAngle },
+
+        // Boolean
+        { "IsWithinLoS", &LuaWorldObject::IsWithinLoS },
+        { "IsInMap", &LuaWorldObject::IsInMap },
+        { "IsWithinDist3d", &LuaWorldObject::IsWithinDist3d },
+        { "IsWithinDist2d", &LuaWorldObject::IsWithinDist2d },
+        { "IsWithinDist", &LuaWorldObject::IsWithinDist },
+        { "IsWithinDistInMap", &LuaWorldObject::IsWithinDistInMap },
+        { "IsInRange", &LuaWorldObject::IsInRange },
+        { "IsInRange2d", &LuaWorldObject::IsInRange2d },
+        { "IsInRange3d", &LuaWorldObject::IsInRange3d },
+        { "IsInFront", &LuaWorldObject::IsInFront },
+        { "IsInBack", &LuaWorldObject::IsInBack },
+
+        // Other
+        { "SummonGameObject", &LuaWorldObject::SummonGameObject },
+        { "SpawnCreature", &LuaWorldObject::SpawnCreature },
+        { "SendPacket", &LuaWorldObject::SendPacket },
+        { "RegisterEvent", &LuaWorldObject::RegisterEvent },
+        { "RemoveEventById", &LuaWorldObject::RemoveEventById },
+        { "RemoveEvents", &LuaWorldObject::RemoveEvents },
+        { "PlayMusic", &LuaWorldObject::PlayMusic },
+        { "PlayDirectSound", &LuaWorldObject::PlayDirectSound },
+        { "PlayDistanceSound", &LuaWorldObject::PlayDistanceSound },
+
+        { NULL, NULL }
+    };
 };
 #endif

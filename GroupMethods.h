@@ -425,6 +425,46 @@ namespace LuaGroup
         group->ConvertToLFG();
         return 0;
     }*/
+
+    ElunaRegister<Group> GroupMethodsOverride[] =
+    {
+        // Getters
+        { "GetMembers", &LuaGroup::GetMembers },
+        { "GetLeaderGUID", &LuaGroup::GetLeaderGUID },
+        { "GetGUID", &LuaGroup::GetGUID },
+        { "GetMemberGroup", &LuaGroup::GetMemberGroup },
+        { "GetMemberGUID", &LuaGroup::GetMemberGUID },
+        { "GetMembersCount", &LuaGroup::GetMembersCount },
+
+        // Setters
+        { "SetLeader", &LuaGroup::SetLeader },
+        { "SetMembersGroup", &LuaGroup::SetMembersGroup },
+        { "SetTargetIcon", &LuaGroup::SetTargetIcon },
+
+        // Boolean
+        { "IsLeader", &LuaGroup::IsLeader },
+        { "AddMember", &LuaGroup::AddMember },
+        { "RemoveMember", &LuaGroup::RemoveMember },
+        { "Disband", &LuaGroup::Disband },
+        { "IsFull", &LuaGroup::IsFull },
+    #if !(defined(CLASSIC) || defined(TBC))
+        { "IsLFGGroup", &LuaGroup::IsLFGGroup },
+    #endif
+        { "IsRaidGroup", &LuaGroup::IsRaidGroup },
+        { "IsBGGroup", &LuaGroup::IsBGGroup },
+        // {"IsBFGroup", &LuaGroup::IsBFGroup},                       // :IsBFGroup() - UNDOCUMENTED - Returns true if the group is a battlefield group
+        { "IsMember", &LuaGroup::IsMember },
+        { "IsAssistant", &LuaGroup::IsAssistant },
+        { "SameSubGroup", &LuaGroup::SameSubGroup },
+        { "HasFreeSlotSubGroup", &LuaGroup::HasFreeSlotSubGroup },
+
+        // Other
+        { "SendPacket", &LuaGroup::SendPacket },
+        // {"ConvertToLFG", &LuaGroup::ConvertToLFG},                 // :ConvertToLFG() - UNDOCUMENTED - Converts the group to an LFG group
+        { "ConvertToRaid", &LuaGroup::ConvertToRaid },
+
+        { NULL, NULL }
+    };
 };
 
 #endif

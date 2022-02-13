@@ -252,5 +252,32 @@ namespace LuaBattleGround
         Eluna::Push(L, bg->GetStatus());
         return 1;
     }
+
+    ElunaRegister<BattleGround> BattleGroundMethodsOverride[] =
+    {
+        // Getters
+        { "GetName", &LuaBattleGround::GetName },
+        { "GetAlivePlayersCountByTeam", &LuaBattleGround::GetAlivePlayersCountByTeam },
+        { "GetMap", &LuaBattleGround::GetMap },
+        { "GetBonusHonorFromKillCount", &LuaBattleGround::GetBonusHonorFromKillCount },
+    #ifndef AZEROTHCORE
+        { "GetBracketId", &LuaBattleGround::GetBracketId },
+    #endif
+        { "GetEndTime", &LuaBattleGround::GetEndTime },
+        { "GetFreeSlotsForTeam", &LuaBattleGround::GetFreeSlotsForTeam },
+        { "GetInstanceId", &LuaBattleGround::GetInstanceId },
+        { "GetMapId", &LuaBattleGround::GetMapId },
+        { "GetTypeId", &LuaBattleGround::GetTypeId },
+        { "GetMaxLevel", &LuaBattleGround::GetMaxLevel },
+        { "GetMinLevel", &LuaBattleGround::GetMinLevel },
+        { "GetMaxPlayers", &LuaBattleGround::GetMaxPlayers },
+        { "GetMinPlayers", &LuaBattleGround::GetMinPlayers },
+        { "GetMaxPlayersPerTeam", &LuaBattleGround::GetMaxPlayersPerTeam },
+        { "GetMinPlayersPerTeam", &LuaBattleGround::GetMinPlayersPerTeam },
+        { "GetWinner", &LuaBattleGround::GetWinner },
+        { "GetStatus", &LuaBattleGround::GetStatus },
+
+        { NULL, NULL }
+    };
 };
 #endif

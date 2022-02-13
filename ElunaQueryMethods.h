@@ -367,6 +367,32 @@ namespace LuaQuery
         lua_settop(L, tbl);
         return 1;
     }
+
+    ElunaRegister<ElunaQuery> QueryMethodsOverride[] =
+    {
+        // Getters
+        { "GetColumnCount", &LuaQuery::GetColumnCount },
+        { "GetRowCount", &LuaQuery::GetRowCount },
+        { "GetRow", &LuaQuery::GetRow },
+        { "GetBool", &LuaQuery::GetBool },
+        { "GetUInt8", &LuaQuery::GetUInt8 },
+        { "GetUInt16", &LuaQuery::GetUInt16 },
+        { "GetUInt32", &LuaQuery::GetUInt32 },
+        { "GetUInt64", &LuaQuery::GetUInt64 },
+        { "GetInt8", &LuaQuery::GetInt8 },
+        { "GetInt16", &LuaQuery::GetInt16 },
+        { "GetInt32", &LuaQuery::GetInt32 },
+        { "GetInt64", &LuaQuery::GetInt64 },
+        { "GetFloat", &LuaQuery::GetFloat },
+        { "GetDouble", &LuaQuery::GetDouble },
+        { "GetString", &LuaQuery::GetString },
+
+        // Boolean
+        { "NextRow", &LuaQuery::NextRow },
+        { "IsNull", &LuaQuery::IsNull },
+
+        { NULL, NULL }
+    };
 };
 #undef RESULT
 

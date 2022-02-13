@@ -369,5 +369,40 @@ namespace LuaMap
         lua_settop(L, tbl);
         return 1;
     }
+
+    ElunaRegister<Map> MapMethodsOverride[] =
+    {
+        // Getters
+        { "GetName", &LuaMap::GetName },
+        { "GetDifficulty", &LuaMap::GetDifficulty },
+        { "GetInstanceId", &LuaMap::GetInstanceId },
+        { "GetInstanceData", &LuaMap::GetInstanceData },
+        { "GetPlayerCount", &LuaMap::GetPlayerCount },
+        { "GetPlayers", &LuaMap::GetPlayers },
+        { "GetMapId", &LuaMap::GetMapId },
+        { "GetAreaId", &LuaMap::GetAreaId },
+        { "GetHeight", &LuaMap::GetHeight },
+        { "GetWorldObject", &LuaMap::GetWorldObject },
+
+        // Setters
+        { "SetWeather", &LuaMap::SetWeather },
+
+        // Boolean
+    #ifndef CLASSIC
+        { "IsArena", &LuaMap::IsArena },
+    #endif
+        { "IsBattleground", &LuaMap::IsBattleground },
+        { "IsDungeon", &LuaMap::IsDungeon },
+        { "IsEmpty", &LuaMap::IsEmpty },
+    #ifndef CLASSIC
+        { "IsHeroic", &LuaMap::IsHeroic },
+    #endif
+        { "IsRaid", &LuaMap::IsRaid },
+
+        // Other
+        { "SaveInstanceData", &LuaMap::SaveInstanceData },
+
+        { NULL, NULL }
+    };
 };
 #endif

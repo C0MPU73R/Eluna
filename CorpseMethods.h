@@ -77,5 +77,19 @@ namespace LuaCorpse
         corpse->SaveToDB();
         return 0;
     }
+
+    ElunaRegister<Corpse> CorpseMethodsOverride[] =
+    {
+        // Getters
+        { "GetOwnerGUID", &LuaCorpse::GetOwnerGUID },
+        { "GetGhostTime", &LuaCorpse::GetGhostTime },
+        { "GetType", &LuaCorpse::GetType },
+
+        // Other
+        { "ResetGhostTime", &LuaCorpse::ResetGhostTime },
+        { "SaveToDB", &LuaCorpse::SaveToDB },
+
+        { NULL, NULL }
+    };
 };
 #endif

@@ -110,6 +110,23 @@ namespace LuaVehicle
 #endif
         return 0;
     }
+
+    ElunaRegister<Vehicle> VehicleMethodsOverride[] =
+    {
+        // Getters
+        { "GetOwner", &LuaVehicle::GetOwner },
+        { "GetEntry", &LuaVehicle::GetEntry },
+        { "GetPassenger", &LuaVehicle::GetPassenger },
+
+        // Boolean
+        { "IsOnBoard", &LuaVehicle::IsOnBoard },
+
+        // Other
+        { "AddPassenger", &LuaVehicle::AddPassenger },
+        { "RemovePassenger", &LuaVehicle::RemovePassenger },
+
+        { NULL, NULL }
+    };
 }
 
 #endif // CLASSIC

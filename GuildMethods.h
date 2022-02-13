@@ -301,5 +301,36 @@ namespace LuaGuild
 #endif
         return 0;
     }
+
+    ElunaRegister<Guild> GuildMethodsOverride[] =
+    {
+        // Getters
+        { "GetMembers", &LuaGuild::GetMembers },
+        { "GetLeader", &LuaGuild::GetLeader },
+        { "GetLeaderGUID", &LuaGuild::GetLeaderGUID },
+        { "GetId", &LuaGuild::GetId },
+        { "GetName", &LuaGuild::GetName },
+        { "GetMOTD", &LuaGuild::GetMOTD },
+        { "GetInfo", &LuaGuild::GetInfo },
+        { "GetMemberCount", &LuaGuild::GetMemberCount },
+
+        // Setters
+    #ifndef CLASSIC
+        { "SetBankTabText", &LuaGuild::SetBankTabText },
+    #endif
+        { "SetMemberRank", &LuaGuild::SetMemberRank },
+    #if defined(CLASSIC) || defined(TBC) || defined(WOTLK)
+        { "SetLeader", &LuaGuild::SetLeader },
+    #endif
+
+        // Other
+        { "SendPacket", &LuaGuild::SendPacket },
+        { "SendPacketToRanked", &LuaGuild::SendPacketToRanked },
+        { "Disband", &LuaGuild::Disband },
+        { "AddMember", &LuaGuild::AddMember },
+        { "DeleteMember", &LuaGuild::DeleteMember },
+
+        { NULL, NULL }
+    };
 };
 #endif
