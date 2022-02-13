@@ -460,5 +460,47 @@ namespace LuaObject
         Eluna::Push(L, obj->ToPlayer());
         return 1;
     }
+
+    ElunaRegister<Object> ObjectMethodsOverride[] =
+    {
+        // Getters
+        { "GetEntry", &LuaObject::GetEntry },
+        { "GetGUID", &LuaObject::GetGUID },
+        { "GetGUIDLow", &LuaObject::GetGUIDLow },
+        { "GetInt32Value", &LuaObject::GetInt32Value },
+        { "GetUInt32Value", &LuaObject::GetUInt32Value },
+        { "GetFloatValue", &LuaObject::GetFloatValue },
+        { "GetByteValue", &LuaObject::GetByteValue },
+        { "GetUInt16Value", &LuaObject::GetUInt16Value },
+        { "GetUInt64Value", &LuaObject::GetUInt64Value },
+        { "GetScale", &LuaObject::GetScale },
+        { "GetTypeId", &LuaObject::GetTypeId },
+
+        // Setters
+        { "SetInt32Value", &LuaObject::SetInt32Value },
+        { "SetUInt32Value", &LuaObject::SetUInt32Value },
+        { "UpdateUInt32Value", &LuaObject::UpdateUInt32Value },
+        { "SetFloatValue", &LuaObject::SetFloatValue },
+        { "SetByteValue", &LuaObject::SetByteValue },
+        { "SetUInt16Value", &LuaObject::SetUInt16Value },
+        { "SetInt16Value", &LuaObject::SetInt16Value },
+        { "SetUInt64Value", &LuaObject::SetUInt64Value },
+        { "SetScale", &LuaObject::SetScale },
+        { "SetFlag", &LuaObject::SetFlag },
+
+        // Boolean
+        { "IsInWorld", &LuaObject::IsInWorld },
+        { "HasFlag", &LuaObject::HasFlag },
+
+        // Other
+        { "ToGameObject", &LuaObject::ToGameObject },
+        { "ToUnit", &LuaObject::ToUnit },
+        { "ToCreature", &LuaObject::ToCreature },
+        { "ToPlayer", &LuaObject::ToPlayer },
+        { "ToCorpse", &LuaObject::ToCorpse },
+        { "RemoveFlag", &LuaObject::RemoveFlag },
+
+        { NULL, NULL }
+    };
 };
 #endif

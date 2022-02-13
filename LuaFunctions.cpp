@@ -152,41 +152,41 @@ luaL_Reg GlobalMethods[] =
 ElunaRegister<Object> ObjectMethods[] =
 {
     // Getters
-    { "GetEntry", &LuaObject::GetEntry },
-    { "GetGUID", &LuaObject::GetGUID },
-    { "GetGUIDLow", &LuaObject::GetGUIDLow },
-    { "GetInt32Value", &LuaObject::GetInt32Value },
-    { "GetUInt32Value", &LuaObject::GetUInt32Value },
-    { "GetFloatValue", &LuaObject::GetFloatValue },
-    { "GetByteValue", &LuaObject::GetByteValue },
-    { "GetUInt16Value", &LuaObject::GetUInt16Value },
-    { "GetUInt64Value", &LuaObject::GetUInt64Value },
-    { "GetScale", &LuaObject::GetScale },
-    { "GetTypeId", &LuaObject::GetTypeId },
+    { "GetEntry", nullptr },
+    { "GetGUID", nullptr },
+    { "GetGUIDLow", nullptr },
+    { "GetInt32Value", nullptr },
+    { "GetUInt32Value", nullptr },
+    { "GetFloatValue", nullptr },
+    { "GetByteValue", nullptr },
+    { "GetUInt16Value", nullptr },
+    { "GetUInt64Value", nullptr },
+    { "GetScale", nullptr },
+    { "GetTypeId", nullptr },
 
     // Setters
-    { "SetInt32Value", &LuaObject::SetInt32Value },
-    { "SetUInt32Value", &LuaObject::SetUInt32Value },
-    { "UpdateUInt32Value", &LuaObject::UpdateUInt32Value },
-    { "SetFloatValue", &LuaObject::SetFloatValue },
-    { "SetByteValue", &LuaObject::SetByteValue },
-    { "SetUInt16Value", &LuaObject::SetUInt16Value },
-    { "SetInt16Value", &LuaObject::SetInt16Value },
-    { "SetUInt64Value", &LuaObject::SetUInt64Value },
-    { "SetScale", &LuaObject::SetScale },
-    { "SetFlag", &LuaObject::SetFlag },
+    { "SetInt32Value", nullptr },
+    { "SetUInt32Value", nullptr },
+    { "UpdateUInt32Value", nullptr },
+    { "SetFloatValue", nullptr },
+    { "SetByteValue", nullptr },
+    { "SetUInt16Value", nullptr },
+    { "SetInt16Value", nullptr },
+    { "SetUInt64Value", nullptr },
+    { "SetScale", nullptr },
+    { "SetFlag", nullptr },
 
     // Boolean
-    { "IsInWorld", &LuaObject::IsInWorld },
-    { "HasFlag", &LuaObject::HasFlag },
+    { "IsInWorld", nullptr },
+    { "HasFlag", nullptr },
 
     // Other
-    { "ToGameObject", &LuaObject::ToGameObject },
-    { "ToUnit", &LuaObject::ToUnit },
-    { "ToCreature", &LuaObject::ToCreature },
-    { "ToPlayer", &LuaObject::ToPlayer },
-    { "ToCorpse", &LuaObject::ToCorpse },
-    { "RemoveFlag", &LuaObject::RemoveFlag },
+    { "ToGameObject", nullptr },
+    { "ToUnit", nullptr },
+    { "ToCreature", nullptr },
+    { "ToPlayer", nullptr },
+    { "ToCorpse", nullptr },
+    { "RemoveFlag", nullptr },
 
     { NULL, NULL }
 };
@@ -994,22 +994,22 @@ ElunaRegister<Item> ItemMethods[] =
 ElunaRegister<Aura> AuraMethods[] =
 {
     // Getters
-    { "GetCaster", &LuaAura::GetCaster },
-    { "GetCasterGUID", &LuaAura::GetCasterGUID },
-    { "GetCasterLevel", &LuaAura::GetCasterLevel },
-    { "GetDuration", &LuaAura::GetDuration },
-    { "GetMaxDuration", &LuaAura::GetMaxDuration },
-    { "GetAuraId", &LuaAura::GetAuraId },
-    { "GetStackAmount", &LuaAura::GetStackAmount },
-    { "GetOwner", &LuaAura::GetOwner },
+    { "GetCaster", nullptr },           // Function defined per core in AuraMethods.h
+    { "GetCasterGUID", nullptr },       // Function defined per core in AuraMethods.h
+    { "GetCasterLevel", nullptr },      // Function defined per core in AuraMethods.h
+    { "GetDuration", nullptr },         // Function defined per core in AuraMethods.h
+    { "GetMaxDuration", nullptr },      // Function defined per core in AuraMethods.h
+    { "GetAuraId", nullptr },           // Function defined per core in AuraMethods.h
+    { "GetStackAmount", nullptr },      // Function defined per core in AuraMethods.h
+    { "GetOwner", nullptr },            // Function defined per core in AuraMethods.h
 
     // Setters
-    { "SetDuration", &LuaAura::SetDuration },
-    { "SetMaxDuration", &LuaAura::SetMaxDuration },
-    { "SetStackAmount", &LuaAura::SetStackAmount },
+    { "SetDuration", nullptr },         // Function defined per core in AuraMethods.h
+    { "SetMaxDuration", nullptr },      // Function defined per core in AuraMethods.h
+    { "SetStackAmount", nullptr },      // Function defined per core in AuraMethods.h
 
     // Other
-    { "Remove", &LuaAura::Remove },
+    { "Remove", nullptr },              // Function defined per core in AuraMethods.h
 
     { NULL, NULL }
 };
@@ -1362,79 +1362,79 @@ void RegisterFunctions(Eluna* E)
     ElunaGlobal::SetMethods(E, GlobalMethods);
 
     ElunaTemplate<Object>::Register(E, "Object");
-    ElunaTemplate<Object>::SetMethods(E, ObjectMethods);
+    ElunaTemplate<Object>::SetMethods(E, ObjectMethods, LuaObject::ObjectMethodsOverride);
 
     ElunaTemplate<WorldObject>::Register(E, "WorldObject");
-    ElunaTemplate<WorldObject>::SetMethods(E, ObjectMethods);
-    ElunaTemplate<WorldObject>::SetMethods(E, WorldObjectMethods);
+    ElunaTemplate<WorldObject>::SetMethods(E, ObjectMethods, LuaObject::ObjectMethodsOverride);
+    ElunaTemplate<WorldObject>::SetMethods(E, WorldObjectMethods, WorldObjectMethods);
 
     ElunaTemplate<Unit>::Register(E, "Unit");
-    ElunaTemplate<Unit>::SetMethods(E, ObjectMethods);
-    ElunaTemplate<Unit>::SetMethods(E, WorldObjectMethods);
-    ElunaTemplate<Unit>::SetMethods(E, UnitMethods);
+    ElunaTemplate<Unit>::SetMethods(E, ObjectMethods, LuaObject::ObjectMethodsOverride);
+    ElunaTemplate<Unit>::SetMethods(E, WorldObjectMethods, WorldObjectMethods);
+    ElunaTemplate<Unit>::SetMethods(E, UnitMethods, UnitMethods);
 
     ElunaTemplate<Player>::Register(E, "Player");
-    ElunaTemplate<Player>::SetMethods(E, ObjectMethods);
-    ElunaTemplate<Player>::SetMethods(E, WorldObjectMethods);
-    ElunaTemplate<Player>::SetMethods(E, UnitMethods);
-    ElunaTemplate<Player>::SetMethods(E, PlayerMethods);
+    ElunaTemplate<Player>::SetMethods(E, ObjectMethods, LuaObject::ObjectMethodsOverride);
+    ElunaTemplate<Player>::SetMethods(E, WorldObjectMethods, WorldObjectMethods);
+    ElunaTemplate<Player>::SetMethods(E, UnitMethods, UnitMethods);
+    ElunaTemplate<Player>::SetMethods(E, PlayerMethods, PlayerMethods);
 
     ElunaTemplate<Creature>::Register(E, "Creature");
-    ElunaTemplate<Creature>::SetMethods(E, ObjectMethods);
-    ElunaTemplate<Creature>::SetMethods(E, WorldObjectMethods);
-    ElunaTemplate<Creature>::SetMethods(E, UnitMethods);
-    ElunaTemplate<Creature>::SetMethods(E, CreatureMethods);
+    ElunaTemplate<Creature>::SetMethods(E, ObjectMethods, LuaObject::ObjectMethodsOverride);
+    ElunaTemplate<Creature>::SetMethods(E, WorldObjectMethods, WorldObjectMethods);
+    ElunaTemplate<Creature>::SetMethods(E, UnitMethods, UnitMethods);
+    ElunaTemplate<Creature>::SetMethods(E, CreatureMethods, CreatureMethods);
 
     ElunaTemplate<GameObject>::Register(E, "GameObject");
-    ElunaTemplate<GameObject>::SetMethods(E, ObjectMethods);
-    ElunaTemplate<GameObject>::SetMethods(E, WorldObjectMethods);
-    ElunaTemplate<GameObject>::SetMethods(E, GameObjectMethods);
+    ElunaTemplate<GameObject>::SetMethods(E, ObjectMethods, LuaObject::ObjectMethodsOverride);
+    ElunaTemplate<GameObject>::SetMethods(E, WorldObjectMethods, WorldObjectMethods);
+    ElunaTemplate<GameObject>::SetMethods(E, GameObjectMethods, GameObjectMethods);
 
     ElunaTemplate<Corpse>::Register(E, "Corpse");
-    ElunaTemplate<Corpse>::SetMethods(E, ObjectMethods);
-    ElunaTemplate<Corpse>::SetMethods(E, WorldObjectMethods);
-    ElunaTemplate<Corpse>::SetMethods(E, CorpseMethods);
+    ElunaTemplate<Corpse>::SetMethods(E, ObjectMethods, LuaObject::ObjectMethodsOverride);
+    ElunaTemplate<Corpse>::SetMethods(E, WorldObjectMethods, WorldObjectMethods);
+    ElunaTemplate<Corpse>::SetMethods(E, CorpseMethods, CorpseMethods);
 
     ElunaTemplate<Item>::Register(E, "Item");
-    ElunaTemplate<Item>::SetMethods(E, ObjectMethods);
-    ElunaTemplate<Item>::SetMethods(E, ItemMethods);
+    ElunaTemplate<Item>::SetMethods(E, ObjectMethods, LuaObject::ObjectMethodsOverride);
+    ElunaTemplate<Item>::SetMethods(E, ItemMethods, ItemMethods);
 
 #ifndef CLASSIC
 #ifndef TBC
     ElunaTemplate<Vehicle>::Register(E, "Vehicle");
-    ElunaTemplate<Vehicle>::SetMethods(E, VehicleMethods);
+    ElunaTemplate<Vehicle>::SetMethods(E, VehicleMethods, VehicleMethods);
 #endif
 #endif
 
     ElunaTemplate<Group>::Register(E, "Group");
-    ElunaTemplate<Group>::SetMethods(E, GroupMethods);
+    ElunaTemplate<Group>::SetMethods(E, GroupMethods, GroupMethods);
 
     ElunaTemplate<Guild>::Register(E, "Guild");
-    ElunaTemplate<Guild>::SetMethods(E, GuildMethods);
+    ElunaTemplate<Guild>::SetMethods(E, GuildMethods, GuildMethods);
 
     ElunaTemplate<Aura>::Register(E, "Aura");
-    ElunaTemplate<Aura>::SetMethods(E, AuraMethods);
+    ElunaTemplate<Aura>::SetMethods(E, AuraMethods, LuaAura::AuraMethodsOverride);
 
     ElunaTemplate<Spell>::Register(E, "Spell");
-    ElunaTemplate<Spell>::SetMethods(E, SpellMethods);
+    ElunaTemplate<Spell>::SetMethods(E, SpellMethods, SpellMethods);
 
     ElunaTemplate<Quest>::Register(E, "Quest");
-    ElunaTemplate<Quest>::SetMethods(E, QuestMethods);
+    ElunaTemplate<Quest>::SetMethods(E, QuestMethods, QuestMethods);
 
     ElunaTemplate<Map>::Register(E, "Map");
-    ElunaTemplate<Map>::SetMethods(E, MapMethods);
+    ElunaTemplate<Map>::SetMethods(E, MapMethods, MapMethods);
 
     ElunaTemplate<AuctionHouseEntry>::Register(E, "AuctionHouseEntry");
-    ElunaTemplate<AuctionHouseEntry>::SetMethods(E, AuctionMethods);
+    ElunaTemplate<AuctionHouseEntry>::SetMethods(E, AuctionMethods, AuctionMethods);
 
     ElunaTemplate<BattleGround>::Register(E, "BattleGround");
-    ElunaTemplate<BattleGround>::SetMethods(E, BattleGroundMethods);
+    ElunaTemplate<BattleGround>::SetMethods(E, BattleGroundMethods, BattleGroundMethods);
 
     ElunaTemplate<WorldPacket>::Register(E, "WorldPacket", true);
-    ElunaTemplate<WorldPacket>::SetMethods(E, PacketMethods);
+    ElunaTemplate<WorldPacket>::SetMethods(E, PacketMethods, PacketMethods);
 
     ElunaTemplate<ElunaQuery>::Register(E, "ElunaQuery", true);
-    ElunaTemplate<ElunaQuery>::SetMethods(E, QueryMethods);
+    ElunaTemplate<ElunaQuery>::SetMethods(E, QueryMethods, QueryMethods);
 
     ElunaTemplate<long long>::Register(E, "long long", true);
 

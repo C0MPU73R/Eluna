@@ -233,16 +233,19 @@ public:
     }
 
     template<typename C>
-    static void SetMethods(Eluna* E, ElunaRegister<C>* methodTable)
+    static void SetMethods(Eluna* E, ElunaRegister<C>* methodTable, ElunaRegister<C>* overrideTable)
     {
         ASSERT(E);
         ASSERT(tname);
         ASSERT(methodTable);
+        ASSERT(overrideTable);
 
         // get metatable
         lua_pushstring(E->L, tname);
         lua_rawget(E->L, LUA_REGISTRYINDEX);
         ASSERT(lua_istable(E->L, -1));
+
+        //TODO: Add function here to override methodTable with overrideTable entries
 
         for (; methodTable && methodTable->name && methodTable->mfunc; ++methodTable)
         {
